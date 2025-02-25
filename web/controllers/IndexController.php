@@ -5,10 +5,10 @@ class IndexController {
 	public function run() {
 	
         session_start();
-		if (isset($_SESSION['status']) && $_SESSION['status'] == 'activo') {
+		if (isset($_SESSION['status']) && $_SESSION['status'] == 1) {
             include "views/";
         } else {
-            include "views/pages/LoginRegister.php";
+            include "views/pages/Register.php";
         }
 		
 	}
