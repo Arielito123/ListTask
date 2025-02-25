@@ -5,7 +5,7 @@ class MysqlDb {
        static  public function connectToDatabase()
         {
             $hostname = getenv("MYSQLSERVER");
-            $database = getenv("DB_NAME_isft177");
+            $database = getenv("DB_NAME_LIST");
             $username = getenv("MYSQL_USER");
             $password = getenv("MYSQL_PASSWORD");
             $charset = "utf8";

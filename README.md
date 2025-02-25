@@ -161,3 +161,17 @@ Esta tabla almacena las tareas creadas por los usuarios.
 | created_at   | TIMESTAMP     | Default: CURRENT_TIMESTAMP                      |
 
 
+🚀 Mejoras y Modificaciones Recientes
+🔧 Base de Datos
+Se modificó la estructura de la tabla users, cambiando el campo status de tipo ENUM a TINYINT(2).
+Se agregó una validación para evitar registros duplicados en la base de datos, asegurando que no se repitan correos electrónicos.
+🎨 Cambios en el Diseño
+Se separó el formulario de Login y Registro en dos vistas totalmente independientes, manteniendo estilos similares para coherencia visual.
+Se agregó Bootstrap para mejorar la apariencia y responsividad de los formularios.
+🛠️ Validaciones Implementadas
+Nombre y Apellido:
+Solo pueden contener letras (incluyendo caracteres acentuados y la letra ñ).
+No pueden superar los 70 caracteres.
+Correo Electrónico:
+Se agregó validación para verificar que el formato del email sea correcto.
+Se implementó una verificación para que no se repitan correos en la base de datos.

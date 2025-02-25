@@ -1,7 +1,7 @@
 <?php
 require_once 'config/MysqlDb.php';
 /*$conection=new MysqlDb();
-$conection->test()*/
+$conection->test();*/
 
 spl_autoload_register(function ($class) {
 	if (strpos($class, "Controller")) {
@@ -11,7 +11,6 @@ spl_autoload_register(function ($class) {
 		require_once 'models/' . $class . '.php';
 	};
 });
-
 
 $index = new IndexController;
 $index->run();
