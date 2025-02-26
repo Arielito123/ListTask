@@ -74,7 +74,28 @@ class UserModel {
         }
     }
     
-    
+    static public function dataUser($id)
+    {
+       
+
+        $sql = "SELECT users.id AS id_user, 
+        users.name AS name_user,
+        users.last_name AS last_name_user,
+        users.mail AS user_mail,
+        users.phone AS user_phone,
+        Roles.details as name_rol 
+        FROM users join Roles on users.fk_rol_id=Roles.id_rol 
+        WHERE users.id = :id_user";
+        $stmt = MysqlDb::connectToDatabase()->prepare($sql);
+        $stmt->bindParam(':id_user', $id, PDO::PARAM_INT);
+        if ($stmt->execute()) {
+            return $stmt->fetch(PDO::FETCH_ASSOC);
+        } else {
+            print_r($stmt->errorInfo());
+        }
+
+        $stmt = null;
+    }
 
 }
 

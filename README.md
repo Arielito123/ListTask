@@ -205,3 +205,16 @@ composer require phpmailer/phpmailer
 Se agrego al Proyecto
 📁 vendor/phpmailer → Librería PHPMailer
 📁 views/html → Plantillas html para enviar los correo con estilo
+
+Cambios Realizados
+SweetAlert Integration: Se agregó un script para manejar notificaciones y alertas personalizadas utilizando SweetAlert.
+Integración con AdminLTE: Se incluyó la carpeta dist y el plugin necesario para implementar la plantilla AdminLTE.
+Estructura de Módulos: Se creó una carpeta modules que contiene las partes reutilizables de la plantilla, como el head, footer y los scripts personalizados.
+Gestión de Roles: Se añadió una carpeta getroles que maneja las vistas según los diferentes roles de usuario.
+Punto de Control de Sesión: Se creó un archivo checkpoint que gestiona el inicio de sesión, las vistas y las redirecciones.
+Cierre de Sesión: Se implementó un archivo para gestionar el cierre de sesión de los usuarios.
+Carpeta de Imágenes: Se añadió una carpeta para almacenar las imágenes del proyecto.
+Dashboard de Tareas: En la página principal (home), se presenta un resumen de las estadísticas de las tareas, mostrando la primera parte visual no mas:
+Tareas sin asignar
+Tareas en progreso
+Tareas completadas
