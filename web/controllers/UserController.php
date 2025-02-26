@@ -81,16 +81,15 @@ class UserController {
             $password = $_POST['password'];
             $verificar = UserModel::login($mail,$password);
             if ($verificar != false) {
-                $id_user = $verificar['id_user'];
+                $id_user = $verificar['id'];
                 $id_rol = $verificar['fk_rol_id'];
                 $state = $verificar['status'];
                 if ($state == 1) {
-                    $_SESSION['state'] = $state;
                     $_SESSION['id_user'] = $id_user;
                     $_SESSION['id_rol'] = $id_rol;
-                    
-
-                    header("Location: register.php?logrado=correcto");//por el momento es de prueba
+                    $_SESSION['state'] = $state;
+                   
+                    header("Location: index.php?pages=home");
                     exit();
                
                 }
@@ -111,6 +110,13 @@ class UserController {
         } else {
             return null;
         }
+    }
+
+
+    static public function sessionDataUser($id)
+    {
+        $dataUser = UserModel::dataUser($id);
+        return $dataUser;
     }
 
 }
