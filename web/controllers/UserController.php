@@ -48,7 +48,7 @@ class UserController {
             
             $checkPhone=UserModel::checkForDuplicates($phone);
             if($checkPhone!=false){
-                header("Location: Register.php?duplicate=error");
+                header("Location: register.php?duplicate=error");
                 exit();
                 
             }
@@ -59,10 +59,10 @@ class UserController {
             $insert = UserModel::newUser($name, $lastname, $_POST["email"], $_POST["phone"], $hashedPassword);
             
             if ($insert) {
-                header("Location: Register.php?success=correcto");
+                header("Location: register.php?success=correcto");
                 exit();
             } else {
-                header("Location: Register.php?error=error");
+                header("Location: register.php?error=error");
                 exit();
             }
         } else {
