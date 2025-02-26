@@ -56,9 +56,10 @@ class UserController {
             $hashedPassword = password_hash($_POST["password"], PASSWORD_DEFAULT);
             
            
-            $insert = UserModel::newUser($name, $lastname, $_POST["email"], $_POST["phone"], $hashedPassword);
+            $insert = UserModel::newUser($name, $lastname, $mail, $phone, $hashedPassword);
             
             if ($insert) {
+                MailerController::sendNewUser($mail, $name, $lastname);
                 header("Location: register.php?success=correcto");
                 exit();
             } else {
@@ -100,6 +101,15 @@ class UserController {
         } else {
             header("Location: index.php?void=error");
             exit();
+        }
+    }
+
+    public static function getSessionData($key)
+    {
+        if (isset($_SESSION[$key])) {
+            return $_SESSION[$key];
+        } else {
+            return null;
         }
     }
 

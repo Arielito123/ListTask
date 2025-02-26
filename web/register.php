@@ -5,6 +5,8 @@
     include_once 'controllers/MessageController.php';
     include_once 'models/UserModel.php';
     include_once 'config/MysqlDb.php';
+    include_once 'controllers/MailerController.php';
+    require 'vendor/autoload.php';
   
     if (isset($_POST["registers"])) {
             $newUser = new UserController();

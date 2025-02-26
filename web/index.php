@@ -12,6 +12,8 @@ spl_autoload_register(function ($class) {
 	};
 });
 
+require 'vendor/autoload.php';
+
 $index = new IndexController;
 $index->run();
 

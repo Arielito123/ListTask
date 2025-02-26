@@ -54,6 +54,26 @@ class UserModel {
     
         return false;
     }
+    static public function getFirstValidCredential()
+    {
+        $sql = "SELECT id_contact, host, email, token, port_email, certificatedSSL
+                FROM credential_email
+                WHERE id_contact = 1";
+    
+        $stmt = MysqlDb::connectToDatabase()->prepare($sql);
+    
+        try {
+            if ($stmt->execute()) {
+                return $stmt->fetch(PDO::FETCH_ASSOC);
+            } else {
+                throw new Exception("Error al ejecutar la consulta: " . implode(" ", $stmt->errorInfo()));
+            }
+        } catch (Exception $e) {
+            error_log($e->getMessage());
+            return false;
+        }
+    }
+    
     
 
 }
