@@ -194,3 +194,14 @@ Si la autenticación falla, se muestra un mensaje de error.
 
 Se agregó una nueva tabla roles a la base de datos con las columnas id y details.
 Los roles disponibles son normal y premium, ya que a futuro se planea incluir anuncios para los usuarios con la versión normal.
+
+
+# 📧 Configuración de PHPMailer para Correos Automáticos
+
+## 📌 Instalación  
+```bash
+composer require phpmailer/phpmailer
+
+Se agrego al Proyecto
+📁 vendor/phpmailer → Librería PHPMailer
+📁 views/html → Plantillas html para enviar los correo con estilo
