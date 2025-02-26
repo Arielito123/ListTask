@@ -165,9 +165,11 @@ Esta tabla almacena las tareas creadas por los usuarios.
 🔧 Base de Datos
 Se modificó la estructura de la tabla users, cambiando el campo status de tipo ENUM a TINYINT(2).
 Se agregó una validación para evitar registros duplicados en la base de datos, asegurando que no se repitan correos electrónicos.
+
 🎨 Cambios en el Diseño
 Se separó el formulario de Login y Registro en dos vistas totalmente independientes, manteniendo estilos similares para coherencia visual.
 Se agregó Bootstrap para mejorar la apariencia y responsividad de los formularios.
+
 🛠️ Validaciones Implementadas
 Nombre y Apellido:
 Solo pueden contener letras (incluyendo caracteres acentuados y la letra ñ).
@@ -175,3 +177,20 @@ No pueden superar los 70 caracteres.
 Correo Electrónico:
 Se agregó validación para verificar que el formato del email sea correcto.
 Se implementó una verificación para que no se repitan correos en la base de datos.
+
+🛠️ Funcionalidad de Inicio de Sesión
+Se implementó el sistema de login con validaciones para verificar si el correo y la contraseña existen en la base de datos.
+
+🔹 Características:
+Verificación de credenciales: Se consulta la base de datos para comprobar si el usuario ingresado existe.
+Validación de contraseña: Se usa password_verify() para comparar la contraseña ingresada con la almacenada en la base de datos.
+Gestión de sesiones: Si el usuario es válido, se almacenan en $_SESSION los datos necesarios para la autenticación.
+Mensajes de error: Se muestran alertas en caso de datos incorrectos o campos vacíos.
+Redirección: Si el login es exitoso, el usuario es enviado a Register.php.
+📌 Ejemplo de Uso
+El usuario ingresa su correo y contraseña en el formulario de login.
+Se validan los datos y, si son correctos, se inicia la sesión.
+Si la autenticación falla, se muestra un mensaje de error.
+
+Se agregó una nueva tabla roles a la base de datos con las columnas id y details.
+Los roles disponibles son normal y premium, ya que a futuro se planea incluir anuncios para los usuarios con la versión normal.

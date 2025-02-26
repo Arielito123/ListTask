@@ -1,8 +1,8 @@
 <?php
 class UserModel {
     static public function newUser($name, $lastname, $mail, $phone, $password) {
-        $query = "INSERT INTO users(name, last_name, mail, phone, password, status) 
-                  VALUES(:name, :last_name, :mail, :phone, :password, 1)";
+        $query = "INSERT INTO users(name, last_name, mail, phone, password,fk_rol_id, status) 
+                  VALUES(:name, :last_name, :mail, :phone, :password,1,1)";
         $stmt = MysqlDb::connectToDatabase()->prepare($query);
         $stmt->bindParam(':name', $name, PDO::PARAM_STR);
         $stmt->bindParam(':last_name', $lastname, PDO::PARAM_STR);
@@ -37,6 +37,24 @@ class UserModel {
             return false;
         }
     }
+
+    static public function login($user, $password)
+    {
+        $query = "SELECT id, mail, name, last_name, password, fk_rol_id, status
+                  FROM users WHERE mail = :mail";
+    
+        $statement = MysqlDb::connectToDatabase()->prepare($query);
+        $statement->bindParam(':mail', $user, PDO::PARAM_STR); // Corregido: sin espacio extra
+        $statement->execute();
+        $row = $statement->fetch(PDO::FETCH_ASSOC);
+    
+        if ($row && password_verify($password, $row['password'])) {
+            return $row;
+        }
+    
+        return false;
+    }
+    
 
 }
 

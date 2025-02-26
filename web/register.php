@@ -1,6 +1,12 @@
 <?php
     
-        if (isset($_POST["registers"])) {
+  
+    include_once 'controllers/UserController.php';
+    include_once 'controllers/MessageController.php';
+    include_once 'models/UserModel.php';
+    include_once 'config/MysqlDb.php';
+  
+    if (isset($_POST["registers"])) {
             $newUser = new UserController();
             $newUser->register();    
         }       
@@ -12,7 +18,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Registro</title>
     <link rel="stylesheet" href="public/css/bootstrap.min.css">
-    <link rel="stylesheet" href="public/css/Register.css">
+    <link rel="stylesheet" href="public/css/register.css">
   
 </head>
 <body>
@@ -71,12 +77,12 @@
         </form>
 
         <div class="login-link">
-            ¿Ya tienes una cuenta? <a href="views/pages/Login.php">Iniciar Sesión</a>
+            ¿Ya tienes una cuenta? <a href="index.php">Iniciar Sesión</a>
         </div>
     </div>
 </body>
 </html>
-<script src="public/js/Register.js"></script>
+<script src="public/js/register.js"></script>
 <script src="public/js/close_notification.js"></script>
 
 
