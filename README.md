@@ -218,3 +218,19 @@ Dashboard de Tareas: En la página principal (home), se presenta un resumen de l
 Tareas sin asignar
 Tareas en progreso
 Tareas completadas
+
+Gestión de Tareas - Integración de manageTasks
+
+Se ha agregado la ruta en el archivo getNormal para controlar la vista de manageTasks. Esta nueva vista permite organizar las tareas en tres estados distintos:
+
+Vista manageTasks
+
+La vista manageTasks proporciona una interfaz con tres enlaces para organizar las tareas según su estado:
+
+Sin asignar: Todas las tareas recién creadas aparecerán en esta categoría hasta que se les asigne un estado de progreso.
+
+En progreso: Una vez que una tarea tenga asignado un estado de progreso, dejará de aparecer en "Sin asignar" y se moverá a esta sección.
+
+Completadas: Aquí se listarán todas las tareas que han sido finalizadas.
+
+
