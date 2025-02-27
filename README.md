@@ -233,4 +233,32 @@ En progreso: Una vez que una tarea tenga asignado un estado de progreso, dejará
 
 Completadas: Aquí se listarán todas las tareas que han sido finalizadas.
 
+✨ Gestión de Tareas - Actualización
+Se ha creado la vista manageTask, junto con su controlador y modelo, para permitir la creación y visualización de tareas.
+
+🔹 Modificación de la Base de Datos
+Se añadieron dos nuevas tablas:
+
+priority:
+
+Contiene los niveles de prioridad de las tareas (Baja, Media, Alta).
+Campos: id, detalle.
+task_state:
+
+Define el estado de la tarea (Sin asignar, En progreso, Completado).
+Campos: id, detalle.
+Ambas tablas están relacionadas como llaves foráneas en tasks.
+
+📌 Nuevas Funcionalidades
+✅ Se agregó la visualización de tareas sin asignar.
+✅ Las tareas se muestran en formato de tarjetas, cada una con:
+
+✏ Editar
+❌ Eliminar
+⏳ Mover a progreso
+🔔 Notificación
+Las tareas se cargan dinámicamente desde la base de datos. 🚀
+
+
+
 
