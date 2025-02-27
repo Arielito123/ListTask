@@ -11,6 +11,5 @@
 <link rel="stylesheet" href="public/plugins/datatables-buttons/css/buttons.bootstrap4.min.css">
 <script src="public/js/jquery-3.5.1.slim.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
-<link rel="stylesheet" href="public/css/styles.css">
-<link rel="stylesheet" href="public/css/modal_career.css">
+<link rel="stylesheet" href="public/css/button.css">
 <link rel="stylesheet" href="public/plugins/toastr/toastr.min.css">
