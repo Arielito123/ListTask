@@ -2,8 +2,7 @@
 
 if (
       ($_GET['pages'] == "home") ||
-      # links administracion de carreras
-      # links administracion de usuarios           
+      ($_GET['pages'] == "manageTasks") ||         
       ($_GET['pages'] == "myData")
 ) {
       include "views/pages/" . $_GET['pages'] . ".php";
