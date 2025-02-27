@@ -52,5 +52,11 @@ class TaskController {
             exit();
         }
     }
+
+    static public function viewTask()
+    {
+        $dataTask = TaskModel::dataTask();
+        return $dataTask;
+    }
     
 }
