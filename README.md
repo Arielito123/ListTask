@@ -259,6 +259,25 @@ Ambas tablas están relacionadas como llaves foráneas en tasks.
 🔔 Notificación
 Las tareas se cargan dinámicamente desde la base de datos. 🚀
 
+🚀 Mejoras Implementadas
 
+Se han realizado las siguientes mejoras en el sistema de gestión de tareas:
+
+🔧 Funcionalidades Agregadas
+
+Edición de tareas: Ahora los usuarios pueden modificar sus tareas existentes.
+Eliminación de tareas: Se ha añadido la opción para eliminar tareas de manera sencilla.
+Cambio de estado a 'En Progreso': Se implementó la funcionalidad para mover una tarea al estado de progreso con un solo clic.
+🔔 Control de Notificaciones
+
+Se agregó un nuevo campo task_notification en la tabla task.
+Este campo permite gestionar las notificaciones de cada tarea.
+Al presionar el botón "Activar Notificación", el valor de task_notification cambia de 0 a 1, activando así las notificaciones para la tarea seleccionada.
+Nota: Si la notificación está activa (task_notification = 1), el botón de activar notificación se oculta, evitando que se pueda activar nuevamente.
+📊 Modificación en la Consulta de Datos
+
+Se actualizó la consulta data_task para que cada usuario solo pueda visualizar las tareas que ha creado.
+
+se agrego un boton de prueba en unnasignedtask temporal para poder configurar los email y despues pasarlo al crontab
 
 

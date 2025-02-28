@@ -30,10 +30,10 @@ class TaskController {
             $today = new DateTime();
             $due_date_obj = new DateTime($reminder_date);
             
-            if($due_date_obj < $today) {
-                header("Location: index.php?pages=manageTasks&subfolder=unassignedTask&date_error=error");
-                exit();
-            }
+            // if($due_date_obj < $today) {
+            //     header("Location: index.php?pages=manageTasks&subfolder=unassignedTask&date_error=error");
+            //     exit();
+            // }
     
             
             $insertTask = TaskModel::insertTask($name_task, $description_task, $reminder_date, $id_user,$priority_task);
@@ -53,10 +53,92 @@ class TaskController {
         }
     }
 
-    static public function viewTask()
+    static public function viewTask($id_user)
     {
-        $dataTask = TaskModel::dataTask();
+        $dataTask = TaskModel::dataTask($id_user);
         return $dataTask;
     }
+
+    public function editTask() {
+        if (!empty($_POST['task_name']) && !empty($_POST['description']) && !empty($_POST['reminder_date']) && !empty($_POST['id_task'])) {
+            $name_task = $_POST['task_name'];
+            $description_task = $_POST['description'];
+            $reminder_date = $_POST['reminder_date'];
+            $id_task = $_POST['id_task'];
     
+            if (strlen($name_task) > 70) { // Antes estaba validando 30
+                header("Location: index.php?pages=manageTasks&subfolder=unassignedTask&letter_name=error");
+                exit();
+            }
+    
+            if (strlen($description_task) > 100) {
+                header("Location: index.php?pages=manageTasks&subfolder=unassignedTask&description_letter=error");
+                exit();
+            }
+    
+            $today = new DateTime();
+            $due_date_obj = new DateTime($reminder_date);
+    
+            if ($due_date_obj < $today) {
+                header("Location: index.php?pages=manageTasks&subfolder=unassignedTask&date_error=error");
+                exit();
+            }
+    
+            // Llamada correcta al modelo
+            $updateTask = TaskModel::editTask($name_task, $description_task, $reminder_date, $id_task);
+    
+            if ($updateTask) {
+                header("Location: index.php?pages=manageTasks&subfolder=unassignedTask&edit_task=correcto");
+                exit();
+            } else {
+                header("Location: index.php?pages=manageTasks&subfolder=unassignedTask&edit_task=error");
+                exit();
+            }
+        } else {
+            header("Location: index.php?pages=manageTasks&subfolder=unassignedTask&void=error");
+            exit();
+        }
+    }
+
+    public function deleteTask($id_task) {
+        
+     
+        $deleteTask = TaskModel::deleteTask($id_task);
+    
+        if ($deleteTask) {
+            header("Location: index.php?pages=manageTasks&subfolder=unassignedTask&delete_task=correcto");
+            exit();
+        } else {
+            header("Location: index.php?pages=manageTasks&subfolder=unassignedTask&delete_task=error");
+            exit();
+        }
+    }
+
+    public function editTaskState() {
+        $id_task = $_POST['id_task'];
+        $editTaskState = TaskModel::editTaskState($id_task);
+    
+        if ($editTaskState) {
+            header("Location: index.php?pages=manageTasks&subfolder=unassignedTask&edit_task_state=correcto");
+            exit();
+        } else {
+            header("Location: index.php?pages=manageTasks&subfolder=unassignedTask&edit_task_state=error");
+            exit();
+        }
+    }
+    
+    public function notificationTask(){
+       $id_task = $_POST['id_task'];
+      
+       $updateTask = TaskModel::notificationUpdateState($id_task);
+
+       if ($updateTask) {
+        header("Location: index.php?pages=manageTasks&subfolder=unassignedTask&edit_task_state=correcto");
+        exit();
+    } else {
+        header("Location: index.php?pages=manageTasks&subfolder=unassignedTask&edit_task_state=error");
+        exit();
+    }
+    
+}
 }
