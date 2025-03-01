@@ -59,6 +59,18 @@ class TaskController {
         return $dataTask;
     }
 
+    static public function viewTaskProgress($id_user)
+    {
+        $dataTask = TaskModel::dataTaskProgress($id_user);
+        return $dataTask;
+    }
+
+    static public function viewTaskComplete($id_user)
+    {
+        $dataTask = TaskModel::dataTaskComplete($id_user);
+        return $dataTask;
+    }
+
     public function editTask() {
         if (!empty($_POST['task_name']) && !empty($_POST['description']) && !empty($_POST['reminder_date']) && !empty($_POST['id_task'])) {
             $name_task = $_POST['task_name'];
@@ -114,15 +126,41 @@ class TaskController {
         }
     }
 
-    public function editTaskState() {
+    public function editTaskStateUnnassigned() {
         $id_task = $_POST['id_task'];
-        $editTaskState = TaskModel::editTaskState($id_task);
+        $editTaskState = TaskModel::editTaskStateUnnasigned($id_task);
     
         if ($editTaskState) {
             header("Location: index.php?pages=manageTasks&subfolder=unassignedTask&edit_task_state=correcto");
             exit();
         } else {
             header("Location: index.php?pages=manageTasks&subfolder=unassignedTask&edit_task_state=error");
+            exit();
+        }
+    }
+
+    public function editTaskState() {
+        $id_task = $_POST['id_task'];
+        $editTaskState = TaskModel::editTaskState($id_task);
+    
+        if ($editTaskState) {
+            header("Location: index.php?pages=manageTasks&subfolder=progressTask&edit_task_state=correcto");
+            exit();
+        } else {
+            header("Location: index.php?pages=manageTasks&subfolder=progressTask&edit_task_state=error");
+            exit();
+        }
+    }
+
+    public function editTaskStateComplete() {
+        $id_task = $_POST['id_task'];
+        $editTaskState = TaskModel::editTaskStateComplete($id_task);
+    
+        if ($editTaskState) {
+            header("Location: index.php?pages=manageTasks&subfolder=completedTask&edit_task_state=correcto");
+            exit();
+        } else {
+            header("Location: index.php?pages=manageTasks&subfolder=completedTask&edit_task_state=error");
             exit();
         }
     }

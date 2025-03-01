@@ -90,8 +90,27 @@ $stmt = null;
         return $stmt->rowCount() > 0;
     }
 
+
+    static public function editTaskStateUnnasigned($id_task) {
+        $sql = "UPDATE tasks SET fk_task_state_id=1 WHERE id=:id_task";
+        
+        $stmt = MysqlDb::connectToDatabase()->prepare($sql);
+        $stmt->bindParam(':id_task', $id_task, PDO::PARAM_INT);
+        
+        return $stmt->execute();
+    }
+
     static public function editTaskState($id_task) {
         $sql = "UPDATE tasks SET fk_task_state_id=2 WHERE id=:id_task";
+        
+        $stmt = MysqlDb::connectToDatabase()->prepare($sql);
+        $stmt->bindParam(':id_task', $id_task, PDO::PARAM_INT);
+        
+        return $stmt->execute();
+    }
+
+    static public function editTaskStateComplete($id_task) {
+        $sql = "UPDATE tasks SET fk_task_state_id=3 WHERE id=:id_task";
         
         $stmt = MysqlDb::connectToDatabase()->prepare($sql);
         $stmt->bindParam(':id_task', $id_task, PDO::PARAM_INT);
@@ -143,7 +162,79 @@ $stmt = null;
         
         return $stmt->execute();
     }
+
     
+    static public function dataTaskProgress($id_user)
+    {
+       
+
+        $sql = "SELECT 
+        tasks.id AS id_task,
+        tasks.title AS name_task,
+        tasks.description AS description_task,
+        tasks.reminder_date AS reminder_date,
+        tasks.fk_id_user AS id_user,
+        users.mail AS user_mail,
+        tasks.fk_priority_id AS task_priority,
+        priority.details AS detail_priority,
+        tasks.fk_task_state_id AS task_state,
+        task_state.details AS detail_state_task,
+        tasks.notification_state AS notification_state,
+        tasks.created_at AS created_at
+    FROM tasks
+    JOIN users ON tasks.fk_id_user = users.id
+    JOIN priority ON tasks.fk_priority_id = priority.id_priority
+    JOIN task_state ON tasks.fk_task_state_id = task_state.id_task_state
+    WHERE fk_task_state_id = 2 AND fk_id_user = :id_user";  
+
+$stmt = MysqlDb::connectToDatabase()->prepare($sql);
+$stmt->bindParam(':id_user', $id_user, PDO::PARAM_INT);
+
+if ($stmt->execute()) {
+return $stmt->fetchAll(PDO::FETCH_ASSOC);
+} else {
+print_r($stmt->errorInfo());
+}
+
+$stmt = null;
+
+    }
+
+    static public function dataTaskComplete($id_user)
+    {
+       
+
+        $sql = "SELECT 
+        tasks.id AS id_task,
+        tasks.title AS name_task,
+        tasks.description AS description_task,
+        tasks.reminder_date AS reminder_date,
+        tasks.fk_id_user AS id_user,
+        users.mail AS user_mail,
+        tasks.fk_priority_id AS task_priority,
+        priority.details AS detail_priority,
+        tasks.fk_task_state_id AS task_state,
+        task_state.details AS detail_state_task,
+        tasks.notification_state AS notification_state,
+        tasks.created_at AS created_at
+    FROM tasks
+    JOIN users ON tasks.fk_id_user = users.id
+    JOIN priority ON tasks.fk_priority_id = priority.id_priority
+    JOIN task_state ON tasks.fk_task_state_id = task_state.id_task_state
+    WHERE fk_task_state_id = 3 AND fk_id_user = :id_user";  
+
+$stmt = MysqlDb::connectToDatabase()->prepare($sql);
+$stmt->bindParam(':id_user', $id_user, PDO::PARAM_INT);
+
+if ($stmt->execute()) {
+return $stmt->fetchAll(PDO::FETCH_ASSOC);
+} else {
+print_r($stmt->errorInfo());
+}
+
+$stmt = null;
+
+    }
 
 }
 ?>
