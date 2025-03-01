@@ -48,6 +48,7 @@ class TaskModel {
         tasks.fk_task_state_id AS task_state,
         task_state.details AS detail_state_task,
         tasks.notification_state AS notification_state,
+        tasks.send_email AS send_email,
         tasks.created_at AS created_at
     FROM tasks
     JOIN users ON tasks.fk_id_user = users.id
@@ -137,7 +138,7 @@ $stmt = null;
                     users.mail AS mail_user,
                     tasks.reminder_date AS reminder_date,
                     tasks.title AS name_task,
-                    tasks.notification_state AS notification_state  -- ✅ Corrección aquí
+                    tasks.notification_state AS notification_state  -- ✅ Corrección aqui
                 FROM tasks
                 JOIN users ON tasks.fk_id_user = users.id
                 WHERE tasks.notification_state = 1";  
@@ -155,7 +156,7 @@ $stmt = null;
     
 
     static public function updateNotificationState($id_task) {
-        $sql = "UPDATE tasks SET notification_state=0 WHERE id=:id_task";
+        $sql = "UPDATE tasks SET notification_state=0, send_email=1 WHERE id=:id_task";
         
         $stmt = MysqlDb::connectToDatabase()->prepare($sql);
         $stmt->bindParam(':id_task', $id_task, PDO::PARAM_INT);
