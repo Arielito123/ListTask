@@ -327,3 +327,12 @@ Se han agregado las siguientes mejoras en la gestión de tareas:
 Ahora es posible visualizar todas las tareas que han sido marcadas como completadas.
 🔄 Botón para Devolver a "Sin Asignar"
 Se ha añadido un botón que permite revertir una tarea completada a estado "Sin Asignar", en caso de ser necesario.
+
+Última Modificación en la Base de Datos
+Se realizó una actualización en la tabla tasks, agregando un nuevo campo llamado send_email. Este campo tiene el siguiente comportamiento:
+
+Valor Predeterminado: 0
+Cuando se envía el correo: Se actualiza a 1 para indicar que el correo ha sido enviado y evitar que la notificación siga apareciendo después del recordatorio.
+Cambios en la Interfaz
+Además, se eliminaron los botones de notificación de las tareas en los estados progressTask y completedTask para simplificar la interacción y evitar redundancias en las notificaciones.
+

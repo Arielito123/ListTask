@@ -28,6 +28,16 @@ if(isset($_POST['new_task'])){
  }
 
 ?>
+
+<div class="container mt-4" id="password-note">
+            <div class="row justify-content-center">
+                <div class="col-md-11">
+                    <div class="alert alert-info text-center">
+                        <p class="mb-0"><b>NOTA: </b>Recuerde activar las notificaciones para recibir recordatorios de las tareas, si se pasa de estado no se podra</p>
+                    </div>
+                </div>
+            </div>
+        </div>
 <section class="container-fluid py-3">
     <div class="row py-4">
         <?php foreach ($data as $key => $value): ?>
@@ -64,7 +74,7 @@ if(isset($_POST['new_task'])){
                                             <i class="fas fa-spinner"></i>
                                             </button>
 
-                                        <?php if($value['notification_state'] == 0): ?> 
+                                        <?php if($value['notification_state'] == 0 && $value['send_email'] == 0): ?> 
                                             <button type="button" class="btn btn-secondary btn-sm flex-grow-1 mx-1" data-toggle="modal"
                                                     data-target="#confirmNotificationModal_<?php echo $value['id_task'];?>" title="Activar Notificación">
                                                     <i class="fas fa-bell"></i>

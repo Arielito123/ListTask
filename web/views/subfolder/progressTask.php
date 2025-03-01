@@ -2,11 +2,6 @@
 $viewTask = new TaskController();
 $data = $viewTask->viewTaskProgress($_SESSION['id_user']);
 
-if(isset($_POST['notificationButton'])){
-    $notification = new TaskController();
-    $notification->notificationTask();
- }
-
 
  if(isset($_POST['CompleteButton'])){
     $progress = new TaskController();
@@ -55,12 +50,7 @@ if(isset($_POST['notificationButton'])){
                                             <i class="fas fa-check"></i>
                                             </button>
 
-                                        <?php if($value['notification_state'] == 0): ?> 
-                                            <button type="button" class="btn btn-secondary btn-sm flex-grow-1 mx-1" data-toggle="modal"
-                                                    data-target="#confirmNotificationModal_<?php echo $value['id_task'];?>" title="Activar Notificación">
-                                                    <i class="fas fa-bell"></i>
-                                            </button>    
-                                    <?php endif; ?>
+                                     
                            </div>
                             <?php endif; ?>
                         </div>
@@ -131,31 +121,4 @@ if(isset($_POST['notificationButton'])){
     <?php endforeach ?>
 
 
-    <?php foreach ($data as $value): ?>
-        <div class="modal fade cierreModal" id="confirmNotificationModal_<?php echo $value['id_task'] ?>" tabindex="-1"
-            role="dialog" aria-labelledby="confirmNotificationModalLabel_<?php echo $value['id_task'] ?>" aria-hidden="true">
-            <div class="modal-dialog modal-dialog-centered modal-sm" role="document">
-                <div class="modal-content">
-                    <div class="modal-header bg-primary text-white">
-                        <h5 class="modal-title" id="confirmNotificationModalLabel_<?php echo $value['id_task'] ?>">Confirmar
-                            notificacion</h5>
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
-                    </div>
-                    <div class="modal-body text-center">
-                        <p>¿quieres activar la notificacion para esta tarea? <?php echo $value['name_task'] ?></p>
-                        
-                    </div>
-                    <div class="modal-footer">
-                        <form method="post">
-                            <input type="hidden" name="id_task" value="<?php echo $value['id_task'] ?>">
-                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
-                            <button type="submit" class="btn btn-primary text-white" name="notificationButton">Activar Notificación</button>
-                        </form>
-                        <div class="response-message text-center"></div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    <?php endforeach ?>
+   
