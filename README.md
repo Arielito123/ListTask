@@ -280,4 +280,29 @@ Se actualizó la consulta data_task para que cada usuario solo pueda visualizar 
 
 se agrego un boton de prueba en unnasignedtask temporal para poder configurar los email y despues pasarlo al crontab
 
+# Configuración del Envio Automático de Emails
+
+Para permitir el envío automático de correos electrónicos mediante `crontab`, se ha realizado una modificación en la estructura del proyecto.
+
+## Reubicación del Archivo `NotificationController.php`
+
+El archivo `NotificationController.php` ha sido movido desde la carpeta `controllers/` a la misma ubicación que el `index.php`. Esto se hizo para garantizar su correcta ejecución en el entorno de Docker y facilitar su acceso desde `crontab`.
+
+## Configuración de `crontab`
+
+Para programar la ejecución automática del `NotificationController.php`, sigue estos pasos:
+
+1. Abre el archivo de tareas programadas de `crontab` con permisos de superusuario:
+   
+   sudo crontab -e
+  
+
+2. Agrega la siguiente línea al final del archivo para ejecutar el `NotificationController.php` de manera continua:
+   
+   sudo docker exec -i list bash -c "cd /var/www/html && php NotificationController.php"
+   
+
+Esto asegurará que el envío de emails se realice automáticamente en segundo plano dentro del contenedor Docker.
+
+
 
