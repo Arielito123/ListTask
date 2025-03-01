@@ -304,5 +304,18 @@ Para programar la ejecución automática del `NotificationController.php`, sigue
 
 Esto asegurará que el envío de emails se realice automáticamente en segundo plano dentro del contenedor Docker.
 
+📝 Actualización del Sistema de Tareas
+🚀 Nuevas Funcionalidades
+Se han agregado las siguientes mejoras en la gestión de tareas:
+
+📌 Vista de Tareas en Progreso
+Ahora es posible visualizar las tareas que están en curso.
+✅ Botón para Completar una Tarea
+Se ha añadido un botón que permite marcar una tarea como completada.
+🔄 Botón para Devolver a "Sin Asignar"
+Se incorporó una opción para devolver una tarea a estado "Sin Asignar" en caso de que sea necesario.
+🛠️ Instrucciones
+Accede a la nueva vista de Tareas en Progreso.
+
 
 

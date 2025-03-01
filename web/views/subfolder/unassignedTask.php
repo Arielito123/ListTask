@@ -180,7 +180,7 @@ if(isset($_POST['new_task'])){
                         
                     </div>
                     <?php
-                    MessageController::show_messages_error('delete_task','no se pudo eliminar la tarea');
+                  
                     ?>
                     <div class="modal-footer">
                         <form method="post">
