@@ -27,16 +27,7 @@ if(isset($_POST['new_task'])){
     $notification->notificationTask();
  }
 
- if(isset($_POST['prueba'])){
-     $notification= new NotificationController();
-     $notification->notification();
- }
-
 ?>
-<form action="" method="post">
-<button name="prueba">prueba</button>
-</form>
-
 <section class="container-fluid py-3">
     <div class="row py-4">
         <?php foreach ($data as $key => $value): ?>
