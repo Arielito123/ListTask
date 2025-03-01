@@ -319,3 +319,11 @@ Accede a la nueva vista de Tareas en Progreso.
 
 
 
+📝 Actualización del Sistema de Tareas
+🚀 Nuevas Funcionalidades
+Se han agregado las siguientes mejoras en la gestión de tareas:
+
+🎯 Vista de Tareas Completadas
+Ahora es posible visualizar todas las tareas que han sido marcadas como completadas.
+🔄 Botón para Devolver a "Sin Asignar"
+Se ha añadido un botón que permite revertir una tarea completada a estado "Sin Asignar", en caso de ser necesario.

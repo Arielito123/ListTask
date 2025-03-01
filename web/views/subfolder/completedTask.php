@@ -1,26 +1,19 @@
 <?php
 $viewTask = new TaskController();
-$data = $viewTask->viewTaskProgress($_SESSION['id_user']);
+$data = $viewTask->viewTaskComplete($_SESSION['id_user']);
 
-if(isset($_POST['notificationButton'])){
+if(isset($_POST['unassignedButton'])){
+    $progress = new TaskController();
+    $progress-> editTaskStateUnnassigned();
+ }
+
+ if(isset($_POST['notificationButton'])){
     $notification = new TaskController();
     $notification->notificationTask();
  }
 
 
- if(isset($_POST['CompleteButton'])){
-    $progress = new TaskController();
-    $progress-> editTaskStateComplete();
- }
-
-
- if(isset($_POST['unassignedButton'])){
-    $progress = new TaskController();
-    $progress-> editTaskStateUnnassigned();
- }
-
 ?>
-
 <section class="container-fluid py-3">
     <div class="row py-4">
         <?php foreach ($data as $key => $value): ?>
@@ -49,11 +42,6 @@ if(isset($_POST['notificationButton'])){
                                                 <i class="fas fa-minus-circle"></i>
                                             </button>
 
-                                        
-                                            <button type="button" class="btn btn-info btn-sm flex-grow-1 mx-1" data-toggle="modal"
-                                            data-target="#confirmCompleteModal_<?php echo $value['id_task'] ?>" title="pasar a Completada">
-                                            <i class="fas fa-check"></i>
-                                            </button>
 
                                         <?php if($value['notification_state'] == 0): ?> 
                                             <button type="button" class="btn btn-secondary btn-sm flex-grow-1 mx-1" data-toggle="modal"
@@ -71,37 +59,8 @@ if(isset($_POST['notificationButton'])){
     </div>
 </section>
 
-<?php foreach ($data as $value): ?>
-        <div class="modal fade cierreModal" id="confirmCompleteModal_<?php echo $value['id_task'] ?>" tabindex="-1"
-            role="dialog" aria-labelledby="confirmDeleteModalLabel_<?php echo $value['id_task'] ?>" aria-hidden="true">
-            <div class="modal-dialog modal-dialog-centered modal-sm" role="document">
-                <div class="modal-content">
-                    <div class="modal-header bg-primary text-white">
-                        <h5 class="modal-title" id="confirmDeleteModalLabel_<?php echo $value['id_task'] ?>">Confirmar
-                            Pasar a progreso</h5>
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
-                    </div>
-                    <div class="modal-body text-center">
-                        <p>¿Estás seguro de que deseas Pasar esta tarea a Completada?</p>
-                        <h5 class="mt-4 mb-4 font-weight-bold"><?php echo $value['name_task'] ?></h5>
-                        
-                    </div>
-                    <div class="modal-footer">
-                        <form method="post">
-                            <input type="hidden" name="id_task" value="<?php echo $value['id_task'] ?>">
-                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
-                            <button type="submit" class="btn btn-primary text-white" name="CompleteButton">Guardar</button>
-                        </form>
-                        <div class="response-message text-center"></div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    <?php endforeach ?>
 
-    <?php foreach ($data as $value): ?>
+<?php foreach ($data as $value): ?>
         <div class="modal fade cierreModal" id="confirmUnassignedModal_<?php echo $value['id_task'] ?>" tabindex="-1"
             role="dialog" aria-labelledby="confirmDeleteModalLabel_<?php echo $value['id_task'] ?>" aria-hidden="true">
             <div class="modal-dialog modal-dialog-centered modal-sm" role="document">
