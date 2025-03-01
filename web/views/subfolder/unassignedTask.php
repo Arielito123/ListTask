@@ -179,9 +179,6 @@ if(isset($_POST['new_task'])){
                         <h5 class="mt-4 mb-4 font-weight-bold"><?php echo $value['name_task'] ?></h5>
                         
                     </div>
-                    <?php
-                  
-                    ?>
                     <div class="modal-footer">
                         <form method="post">
                             <input type="hidden" name="id_task" value="<?php echo $value['id_task'] ?>">
@@ -211,9 +208,6 @@ if(isset($_POST['new_task'])){
                         <p>¿quieres activar la notificacion para esta tarea? <?php echo $value['name_task'] ?></p>
                         
                     </div>
-                    <?php
-                   
-                    ?>
                     <div class="modal-footer">
                         <form method="post">
                             <input type="hidden" name="id_task" value="<?php echo $value['id_task'] ?>">
@@ -228,7 +222,6 @@ if(isset($_POST['new_task'])){
     <?php endforeach ?>
 
 
-<!-- Para crear las tareas -->
 <button type="button" class="btn btn-primary btn-lg btn-floating position-fixed bottom-0 end-0 m-4 shadow"
         data-toggle="modal" data-target="#createTaskModal" title="Crear tarea">
     <i class="fas fa-tasks"></i>
