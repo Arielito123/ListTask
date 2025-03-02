@@ -29,7 +29,18 @@ if(isset($_POST['unassignedButton'])){
                         <div class="mt-auto">
                          <?php  if(isset($_GET['pages'])&& $_GET['pages'] == 'manageTasks'):?>   
                         <div class="d-flex flex-wrap justify-content-between">
-                                                    
+                                            <?php
+                                             date_default_timezone_set('America/Argentina/Buenos_Aires');
+                                             $today = new DateTime();
+                                             $due_date_obj = new DateTime($value['reminder_date']);
+                                             
+                                             
+                                             $today_formatted = $today->format('Y-m-d H:i:s');
+                                             $due_date_formatted = $due_date_obj->format('Y-m-d H:i:s');
+                                             
+                                             if($due_date_formatted > $today_formatted):
+                                             
+                                             ?>       
                                             <button type="button" class="btn btn-warning btn-sm flex-grow-1 mx-1 text-white" 
                                                     data-toggle="modal"
                                                     data-target="#confirmUnassignedModal_<?php echo $value['id_task'] ?>" 
@@ -37,7 +48,7 @@ if(isset($_POST['unassignedButton'])){
                                                 <i class="fas fa-minus-circle"></i>
                                             </button>
 
-
+                                   <?php endif; ?>
                                      
                            </div>
                             <?php endif; ?>

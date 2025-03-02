@@ -36,7 +36,18 @@ $data = $viewTask->viewTaskProgress($_SESSION['id_user']);
                         <div class="mt-auto">
                          <?php  if(isset($_GET['pages'])&& $_GET['pages'] == 'manageTasks'):?>   
                         <div class="d-flex flex-wrap justify-content-between">
-                                                    
+                                            <?php
+                                             date_default_timezone_set('America/Argentina/Buenos_Aires');
+                                             $today = new DateTime();
+                                             $due_date_obj = new DateTime($value['reminder_date']);
+                                             
+                                             
+                                             $today_formatted = $today->format('Y-m-d H:i');
+                                             $due_date_formatted = $due_date_obj->format('Y-m-d H:i');
+                                             
+                                             if($due_date_formatted >$today_formatted):
+                                             
+                                             ?>        
                                             <button type="button" class="btn btn-warning btn-sm flex-grow-1 mx-1 text-white" 
                                                     data-toggle="modal"
                                                     data-target="#confirmUnassignedModal_<?php echo $value['id_task'] ?>" 
@@ -50,7 +61,7 @@ $data = $viewTask->viewTaskProgress($_SESSION['id_user']);
                                             <i class="fas fa-check"></i>
                                             </button>
 
-                                     
+                                     <?php endif; ?>
                            </div>
                             <?php endif; ?>
                         </div>
