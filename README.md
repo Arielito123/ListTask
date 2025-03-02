@@ -336,3 +336,8 @@ Cuando se envía el correo: Se actualiza a 1 para indicar que el correo ha sido 
 Cambios en la Interfaz
 Además, se eliminaron los botones de notificación de las tareas en los estados progressTask y completedTask para simplificar la interacción y evitar redundancias en las notificaciones.
 
+Validación de botones según la fecha de finalización de la tarea
+Se implementó una validación para ocultar los botones de Editar, Pasar a Progreso, pasar a completada y a sin asignar de los siguientes archivos
+unnasignedtask,progressTask y completedTask 
+y Notificaciones cuando la tarea ha alcanzado su fecha de finalización. 
+Esto evita modificaciones en tareas que ya han concluido y mejora la integridad del sistema.
