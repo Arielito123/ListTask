@@ -77,10 +77,7 @@ if(isset($_POST['new_task'])){
                                             <i class="fas fa-edit"></i>
                                             </button>
                                            
-                                            <button type="button" class="btn btn-danger btn-sm flex-grow-1 mx-1" data-toggle="modal"
-                                            data-target="#confirmDeleteModal_<?php echo $value['id_task'] ?>" title="Eliminar">
-                                            <i class="fas fa-trash-alt"></i>
-                                            </button>
+                                          
                                         
                                             <button type="button" class="btn btn-info btn-sm flex-grow-1 mx-1" data-toggle="modal"
                                             data-target="#confirmProgressModal_<?php echo $value['id_task'] ?>" title="pasar a progreso">
@@ -94,6 +91,10 @@ if(isset($_POST['new_task'])){
                                             </button>    
                                     <?php endif; ?>
                                     <?php endif; ?>
+                                    <button type="button" class="btn btn-danger btn-sm flex-grow-1 mx-1" data-toggle="modal"
+                                            data-target="#confirmDeleteModal_<?php echo $value['id_task'] ?>" title="Eliminar">
+                                            <i class="fas fa-trash-alt"></i>
+                                            </button>
                            </div>
                             <?php endif; ?>
                         </div>
