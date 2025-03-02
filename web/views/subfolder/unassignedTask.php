@@ -58,7 +58,20 @@ if(isset($_POST['new_task'])){
                         <div class="mt-auto">
                          <?php  if(isset($_GET['pages'])&& $_GET['pages'] == 'manageTasks'):?>   
                         <div class="d-flex flex-wrap justify-content-between">
-                                
+                                             <?php
+                                            
+                                             date_default_timezone_set('America/Argentina/Buenos_Aires');
+                                            
+                                             $today = new DateTime();
+                                             $due_date_obj = new DateTime($value['reminder_date']);
+                                             
+                                             
+                                             $today_formatted = $today->format('Y-m-d H:i');
+                                             $due_date_formatted = $due_date_obj->format('Y-m-d H:i');
+                                             
+                                             if($due_date_formatted >$today_formatted):
+                                             
+                                             ?>        
                                             <button type="button" class="btn btn-primary btn-sm flex-grow-1 mx-1" data-toggle="modal"
                                             data-target="#modal_edit_<?php echo $value['id_task'] ?>" title="Editar">
                                             <i class="fas fa-edit"></i>
@@ -79,6 +92,7 @@ if(isset($_POST['new_task'])){
                                                     data-target="#confirmNotificationModal_<?php echo $value['id_task'];?>" title="Activar Notificación">
                                                     <i class="fas fa-bell"></i>
                                             </button>    
+                                    <?php endif; ?>
                                     <?php endif; ?>
                            </div>
                             <?php endif; ?>
