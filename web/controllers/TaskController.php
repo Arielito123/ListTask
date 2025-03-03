@@ -126,6 +126,34 @@ class TaskController {
         }
     }
 
+    public function deleteTaskProgress($id_task) {
+        
+     
+        $deleteTask = TaskModel::deleteTask($id_task);
+    
+        if ($deleteTask) {
+            header("Location: index.php?pages=manageTasks&subfolder=progressTask&delete_task=correcto");
+            exit();
+        } else {
+            header("Location: index.php?pages=manageTasks&subfolder=progressTask&delete_task=error");
+            exit();
+        }
+    }
+
+    public function deleteTaskCompleted($id_task) {
+        
+     
+        $deleteTask = TaskModel::deleteTask($id_task);
+    
+        if ($deleteTask) {
+            header("Location: index.php?pages=manageTasks&subfolder=completedTask&delete_task=correcto");
+            exit();
+        } else {
+            header("Location: index.php?pages=manageTasks&subfolder=completedTask&delete_task=error");
+            exit();
+        }
+    }
+
     public function editTaskStateUnnassigned() {
         $id_task = $_POST['id_task'];
         $editTaskState = TaskModel::editTaskStateUnnasigned($id_task);
