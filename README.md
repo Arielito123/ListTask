@@ -341,3 +341,6 @@ Se implementó una validación para ocultar los botones de Editar, Pasar a Progr
 unnasignedtask,progressTask y completedTask 
 y Notificaciones cuando la tarea ha alcanzado su fecha de finalización. 
 Esto evita modificaciones en tareas que ya han concluido y mejora la integridad del sistema.
+
+✨ Nueva Funcionalidad: Eliminación de Tareas ✨
+Ahora puedes eliminar tareas en progreso y completadas de manera sencilla con el nuevo botón de eliminación. 🔥

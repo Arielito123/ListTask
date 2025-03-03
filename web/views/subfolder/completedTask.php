@@ -8,6 +8,12 @@ if(isset($_POST['unassignedButton'])){
  }
 
 
+ if(isset($_POST['deleteButton'])){
+    $delete = new TaskController();
+    $delete->deleteTaskCompleted($_POST['id_task']);
+}
+
+
 ?>
 <section class="container-fluid py-3">
     <div class="row py-4">
@@ -49,9 +55,12 @@ if(isset($_POST['unassignedButton'])){
                                             </button>
 
                                    <?php endif; ?>
-                                     
+                                   <?php endif; ?>
+                                   <button type="button" class="btn btn-danger btn-sm flex-grow-1 mx-1" data-toggle="modal"
+                                            data-target="#confirmDeleteModal_<?php echo $value['id_task'] ?>" title="Eliminar">
+                                            <i class="fas fa-trash-alt"></i>
+                                            </button>  
                            </div>
-                            <?php endif; ?>
                         </div>
                     </div>
                 </div>
@@ -82,6 +91,39 @@ if(isset($_POST['unassignedButton'])){
                             <input type="hidden" name="id_task" value="<?php echo $value['id_task'] ?>">
                             <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
                             <button type="submit" class="btn btn-primary text-white" name="unassignedButton">Guardar</button>
+                        </form>
+                        <div class="response-message text-center"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    <?php endforeach ?>
+
+    <?php foreach ($data as $value): ?>
+        <div class="modal fade cierreModal" id="confirmDeleteModal_<?php echo $value['id_task'] ?>" tabindex="-1"
+            role="dialog" aria-labelledby="confirmDeleteModalLabel_<?php echo $value['id_task'] ?>" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered modal-sm" role="document">
+                <div class="modal-content">
+                    <div class="modal-header bg-danger text-white">
+                        <h5 class="modal-title" id="confirmDeleteModalLabel_<?php echo $value['id_task'] ?>">Confirmar
+                            Eliminación</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body text-center">
+                        <p>¿Estás seguro de que deseas eliminar la siguiente Tarea?</p>
+                        <h5 class="mt-4 mb-4 font-weight-bold"><?php echo $value['name_task'] ?></h5>
+                        <p>Esta acción no se puede deshacer.</p>
+                    </div>
+                    <?php
+                    MessageController::show_messages_error('delete_task','no se pudo eliminar la tarea');
+                    ?>
+                    <div class="modal-footer">
+                        <form method="post">
+                            <input type="hidden" name="id_task" value="<?php echo $value['id_task'] ?>">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+                            <button type="submit" class="btn btn-danger" name="deleteButton">Eliminar</button>
                         </form>
                         <div class="response-message text-center"></div>
                     </div>
