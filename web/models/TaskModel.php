@@ -37,24 +37,25 @@ class TaskModel {
        
 
         $sql = "SELECT 
-        tasks.id AS id_task,
-        tasks.title AS name_task,
-        tasks.description AS description_task,
-        tasks.reminder_date AS reminder_date,
-        tasks.fk_id_user AS id_user,
-        users.mail AS user_mail,
-        tasks.fk_priority_id AS task_priority,
-        priority.details AS detail_priority,
-        tasks.fk_task_state_id AS task_state,
-        task_state.details AS detail_state_task,
-        tasks.notification_state AS notification_state,
-        tasks.send_email AS send_email,
-        tasks.created_at AS created_at
-    FROM tasks
-    JOIN users ON tasks.fk_id_user = users.id
-    JOIN priority ON tasks.fk_priority_id = priority.id_priority
-    JOIN task_state ON tasks.fk_task_state_id = task_state.id_task_state
-    WHERE fk_task_state_id = 1 AND fk_id_user = :id_user";  
+    tasks.id AS id_task,
+    tasks.title AS name_task,
+    tasks.description AS description_task,
+    tasks.reminder_date AS reminder_date,
+    tasks.fk_id_user AS id_user,
+    users.mail AS user_mail,
+    tasks.fk_priority_id AS task_priority,
+    priority.details AS detail_priority,
+    tasks.fk_task_state_id AS task_state,
+    task_state.details AS detail_state_task,
+    tasks.notification_state AS notification_state,
+    tasks.send_email AS send_email,
+    tasks.created_at AS created_at
+        FROM tasks
+        JOIN users ON tasks.fk_id_user = users.id
+        JOIN priority ON tasks.fk_priority_id = priority.id_priority
+        JOIN task_state ON tasks.fk_task_state_id = task_state.id_task_state
+        WHERE fk_task_state_id = 1 AND fk_id_user = :id_user
+        ORDER BY tasks.title ASC";  
 
 $stmt = MysqlDb::connectToDatabase()->prepare($sql);
 $stmt->bindParam(':id_user', $id_user, PDO::PARAM_INT);
@@ -186,7 +187,8 @@ $stmt = null;
     JOIN users ON tasks.fk_id_user = users.id
     JOIN priority ON tasks.fk_priority_id = priority.id_priority
     JOIN task_state ON tasks.fk_task_state_id = task_state.id_task_state
-    WHERE fk_task_state_id = 2 AND fk_id_user = :id_user";  
+    WHERE fk_task_state_id = 2 AND fk_id_user = :id_user
+    ORDER BY tasks.title ASC";  
 
 $stmt = MysqlDb::connectToDatabase()->prepare($sql);
 $stmt->bindParam(':id_user', $id_user, PDO::PARAM_INT);
@@ -222,7 +224,8 @@ $stmt = null;
     JOIN users ON tasks.fk_id_user = users.id
     JOIN priority ON tasks.fk_priority_id = priority.id_priority
     JOIN task_state ON tasks.fk_task_state_id = task_state.id_task_state
-    WHERE fk_task_state_id = 3 AND fk_id_user = :id_user";  
+    WHERE fk_task_state_id = 3 AND fk_id_user = :id_user
+    ORDER BY tasks.title ASC";  
 
 $stmt = MysqlDb::connectToDatabase()->prepare($sql);
 $stmt->bindParam(':id_user', $id_user, PDO::PARAM_INT);
@@ -236,6 +239,69 @@ print_r($stmt->errorInfo());
 $stmt = null;
 
     }
+
+
+    static public function dataCountTaskUnnasigned($id_user)
+    {
+        $sql = "SELECT 
+                    COUNT(CASE WHEN tasks.fk_priority_id = 1 THEN 1 END) as priority_low,
+                    COUNT(CASE WHEN tasks.fk_priority_id = 2 THEN 1 END) as priority_average,
+                    COUNT(CASE WHEN tasks.fk_priority_id = 3 THEN 1 END) as priority_high,
+                    COUNT(CASE WHEN tasks.fk_task_state_id = 1 THEN 1 END) as state_unnasigned
+                FROM tasks
+                WHERE fk_id_user = :id_user AND fk_task_state_id = 1;";
+    
+        $stmt = MysqlDb::connectToDatabase()->prepare($sql);
+        $stmt->bindParam(':id_user', $id_user, PDO::PARAM_INT);
+    
+        if ($stmt->execute()) {
+            return $stmt->fetch(PDO::FETCH_ASSOC); 
+        } else {
+            print_r($stmt->errorInfo());
+        }
+    }
+    
+    static public function dataCountTaskProgress($id_user)
+    {
+        $sql = "SELECT 
+                    COUNT(CASE WHEN tasks.fk_priority_id = 1 THEN 1 END) as priority_low,
+                    COUNT(CASE WHEN tasks.fk_priority_id = 2 THEN 1 END) as priority_average,
+                    COUNT(CASE WHEN tasks.fk_priority_id = 3 THEN 1 END) as priority_high,
+                    COUNT(CASE WHEN tasks.fk_task_state_id = 2 THEN 1 END) as state_progress
+                FROM tasks
+                WHERE fk_id_user = :id_user AND fk_task_state_id = 2;";
+    
+        $stmt = MysqlDb::connectToDatabase()->prepare($sql);
+        $stmt->bindParam(':id_user', $id_user, PDO::PARAM_INT);
+    
+        if ($stmt->execute()) {
+            return $stmt->fetch(PDO::FETCH_ASSOC);  
+        } else {
+            print_r($stmt->errorInfo());
+        }
+    }
+
+    static public function dataCountTaskComplete($id_user)
+    {
+        $sql = "SELECT 
+                    COUNT(CASE WHEN tasks.fk_priority_id = 1 THEN 1 END) as priority_low,
+                    COUNT(CASE WHEN tasks.fk_priority_id = 2 THEN 1 END) as priority_average,
+                    COUNT(CASE WHEN tasks.fk_priority_id = 3 THEN 1 END) as priority_high,
+                    COUNT(CASE WHEN tasks.fk_task_state_id = 3 THEN 1 END) as state_complete
+                FROM tasks
+                WHERE fk_id_user = :id_user AND fk_task_state_id = 3;";
+    
+        $stmt = MysqlDb::connectToDatabase()->prepare($sql);
+        $stmt->bindParam(':id_user', $id_user, PDO::PARAM_INT);
+    
+        if ($stmt->execute()) {
+            return $stmt->fetch(PDO::FETCH_ASSOC);  
+        } else {
+            print_r($stmt->errorInfo());
+        }
+    }
+
+
 
 }
 ?>
