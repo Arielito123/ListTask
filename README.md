@@ -367,3 +367,13 @@ Edición de los Datos del Usuario:
 
 Se implementó un botón de edición que, al hacer clic, abre un modal donde los usuarios pueden modificar su información.
 Al guardar los cambios, la información se actualiza en la base de datos mediante una solicitud de actualización en el UserController.
+
+Modificaciones en home.php
+Se realizaron modificaciones en el archivo home.php para mejorar la visualización de las tareas y sus estados de asignación, progreso y completación. A continuación, se detallan las mejoras implementadas:
+
+Nuevas Consultas a la Base de Datos
+Se agregaron tres consultas para contar las tareas en diferentes estados, además de clasificar las tareas según su prioridad (baja, media y alta).
+
+Contar tareas en progreso: Se cuenta el número total de tareas que están actualmente en progreso (estado en progreso).
+
+Contar tareas completadas: Se cuenta el número total de tareas que ya han sido completadas.
