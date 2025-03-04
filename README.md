@@ -344,3 +344,26 @@ Esto evita modificaciones en tareas que ya han concluido y mejora la integridad 
 
 ✨ Nueva Funcionalidad: Eliminación de Tareas ✨
 Ahora puedes eliminar tareas en progreso y completadas de manera sencilla con el nuevo botón de eliminación. 🔥
+
+Validación de Fechas en la Creación y Edición de Tareas
+
+Descripción
+
+Se ha implementado una validación para evitar que los usuarios establezcan una fecha de finalización anterior a la fecha actual al crear o editar una tarea.
+
+Reglas de Validación
+
+Fecha de finalización: No puede ser anterior a la fecha actual.
+
+Gestión de Usuario - "Mis Datos"
+Descripción
+En nuestra aplicación, los usuarios tienen la capacidad de visualizar y actualizar su información personal de forma fácil y rápida a través de la pestaña Mis Datos. Este apartado permite a los usuarios acceder a sus datos personales, como nombre, apellido, teléfono y correo electrónico, y actualizarlos mediante un botón de edición que abre un modal con los campos correspondientes.
+
+Funcionalidad
+Visualización de los Datos del Usuario:
+
+Los usuarios pueden ver su información personal en un formato limpio y estructurado, destacando su nombre, apellido, teléfono, correo electrónico y rol.
+Edición de los Datos del Usuario:
+
+Se implementó un botón de edición que, al hacer clic, abre un modal donde los usuarios pueden modificar su información.
+Al guardar los cambios, la información se actualiza en la base de datos mediante una solicitud de actualización en el UserController.

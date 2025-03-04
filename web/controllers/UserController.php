@@ -22,7 +22,7 @@ class UserController {
                 !preg_match("/^[a-zA-ZáéíóúÁÉÍÓÚñÑ\s]+$/u", $name) ||
                 !preg_match("/^[a-zA-ZáéíóúÁÉÍÓÚñÑ\s]+$/u", $lastname)
             ) {
-                header("Location: index.php?letter=error");
+                header("Location:  register.php?letter=error");
                 exit();
             }
             
@@ -119,6 +119,77 @@ class UserController {
         return $dataUser;
     }
 
+
+    public function editUser() {
+      
+       
+        if (
+            !empty($_POST["name_user"]) &&
+            !empty($_POST["last_name_user"]) &&
+            !empty($_POST["user_mail"]) &&
+            !empty($_POST["user_phone"] && !empty($_POST["id_user"]))
+        ) {
+            
+            
+            
+            $name = ucwords(strtolower(trim($_POST['name_user'])));
+            $lastname = ucwords(strtolower(trim($_POST['last_name_user'])));
+            $mail=$_POST['user_mail'];
+            $phone=$_POST['user_phone'];
+            $id_user=$_POST['id_user'];
+            
+           
+            if (
+                !preg_match("/^[a-zA-ZáéíóúÁÉÍÓÚñÑ\s]+$/u", $name) ||
+                !preg_match("/^[a-zA-ZáéíóúÁÉÍÓÚñÑ\s]+$/u", $lastname)
+            ) {
+                header("Location: index.php?pages=myData&letter=error");
+                exit();
+            }
+            
+            
+            if (strlen($name) > 70 || strlen($lastname) > 70) {
+                header("Location: index.php?pages=myData?num=error");
+                exit();
+            }
+
+            if (strlen($phone) > 15) {
+                header("Location: index.php?pages=myData&phone=error");
+                exit();
+            }
+            
+           
+           
+            
+            
+            
+            if (!filter_var($mail, FILTER_VALIDATE_EMAIL)) {
+                header("Location: index.php?pages=myData&email=error");
+                exit();
+            }
+            
+                     
+         
+            
+           
+            $insert = UserModel::editUser($name, $lastname, $mail, $phone, $id_user);
+            
+            if ($insert) {
+               
+                header("Location: index.php?pages=myData&success=correcto");
+                exit();
+            } else {
+                header("Location: index.php?pages=myData&error=error");
+                exit();
+            }
+        } else {
+             header("Location: index.php?pages=myData&void=error");
+            exit();
+        }
+    }
+
+
 }
+
 
 ?>
