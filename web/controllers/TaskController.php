@@ -27,13 +27,20 @@ class TaskController {
             }
     
             
+            date_default_timezone_set('America/Argentina/Buenos_Aires');
             $today = new DateTime();
             $due_date_obj = new DateTime($reminder_date);
             
-            // if($due_date_obj < $today) {
-            //     header("Location: index.php?pages=manageTasks&subfolder=unassignedTask&date_error=error");
-            //     exit();
-            // }
+            
+            $today_formatted = $today->format('Y-m-d H:i');
+            $due_date_formatted = $due_date_obj->format('Y-m-d H:i');
+    
+            if ($due_date_formatted <= $today_formatted) {
+                header("Location: index.php?pages=manageTasks&subfolder=unassignedTask&date_error=error");
+                exit();
+            }
+            
+            
     
             
             $insertTask = TaskModel::insertTask($name_task, $description_task, $reminder_date, $id_user,$priority_task);
@@ -88,10 +95,17 @@ class TaskController {
                 exit();
             }
     
+           
+
+            date_default_timezone_set('America/Argentina/Buenos_Aires');
             $today = new DateTime();
             $due_date_obj = new DateTime($reminder_date);
+            
+            
+            $today_formatted = $today->format('Y-m-d H:i');
+            $due_date_formatted = $due_date_obj->format('Y-m-d H:i');
     
-            if ($due_date_obj < $today) {
+            if ($due_date_formatted <= $today_formatted) {
                 header("Location: index.php?pages=manageTasks&subfolder=unassignedTask&date_error=error");
                 exit();
             }
