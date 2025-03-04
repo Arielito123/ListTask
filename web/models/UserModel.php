@@ -97,6 +97,22 @@ class UserModel {
         $stmt = null;
     }
 
+
+    static public function editUser($name_user, $last_name_user, $user_mail, $user_phone, $id_user){
+        $sql = "UPDATE users SET name = :name_user, last_name = :last_name_user, phone = :phone_user, mail = :mail_user WHERE id = :id_user";
+    
+        $stmt = MysqlDb::connectToDatabase()->prepare($sql);
+        $stmt->bindParam(':name_user', $name_user, PDO::PARAM_STR);
+        $stmt->bindParam(':last_name_user', $last_name_user, PDO::PARAM_STR);
+        $stmt->bindParam(':phone_user', $user_phone, PDO::PARAM_STR);
+        $stmt->bindParam(':mail_user', $user_mail, PDO::PARAM_STR);
+        $stmt->bindParam(':id_user', $id_user, PDO::PARAM_INT);
+    
+        return $stmt->execute();
+    }
+    
+
+
 }
 
 
