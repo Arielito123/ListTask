@@ -64,7 +64,7 @@
                     <input type="password" id="repeatPassword" name="repeatPassword" required placeholder="Repite tu contraseña">
                     <button type="button" class="toggle-password" onclick="togglePassword('repeatPassword')">👁️</button>
                 </div>
-                <div id="match-validation" class="validation-message">Las contraseñas no coinciden</div>
+                
             </div>
             <?php
           MessageController::showMessageVerify("success", "Registro exitoso");
@@ -74,6 +74,8 @@
           MessageController::show_messages_error("void", "El correo ya existe");
           MessageController::show_messages_error("duplicate", "El corrreo ya existe");
           MessageController::show_messages_error("email", "debe ser un correo valido");
+          MessageController::show_messages_error("password", "La contraseña no coincide");
+          MessageController::show_messages_error("passwordLong", "La contraseña debe tener al menos 8 caracteres");
             ?>             
             <button name="registers" type="submit">Registrarme</button>
         </form>

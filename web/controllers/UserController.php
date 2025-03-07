@@ -8,7 +8,7 @@ class UserController {
             !empty($_POST["last_name"]) &&
             !empty($_POST["email"]) &&
             !empty($_POST["phone"]) &&
-            !empty($_POST["password"])
+            !empty($_POST["password"]&& !empty($_POST["repeatPassword"]))
         ) {
             
             $name = ucwords(strtolower(trim($_POST['name'])));
@@ -51,6 +51,16 @@ class UserController {
                 header("Location: register.php?duplicate=error");
                 exit();
                 
+            }
+
+            if($_POST["password"]!=$_POST["repeatPassword"]){
+                header("Location: register.php?password=error");
+                exit();
+            }
+
+            if (strlen($_POST["password"]) < 8) {
+                header("Location: register.php?passwordLong=error");
+                exit();
             }
           
             $hashedPassword = password_hash($_POST["password"], PASSWORD_DEFAULT);

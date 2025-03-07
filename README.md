@@ -368,12 +368,10 @@ Edición de los Datos del Usuario:
 Se implementó un botón de edición que, al hacer clic, abre un modal donde los usuarios pueden modificar su información.
 Al guardar los cambios, la información se actualiza en la base de datos mediante una solicitud de actualización en el UserController.
 
-Modificaciones en home.php
-Se realizaron modificaciones en el archivo home.php para mejorar la visualización de las tareas y sus estados de asignación, progreso y completación. A continuación, se detallan las mejoras implementadas:
+🔒 Validación de Contraseña
+Se ha implementado una validación de contraseña en el formulario de registro para garantizar mayor seguridad.
 
-Nuevas Consultas a la Base de Datos
-Se agregaron tres consultas para contar las tareas en diferentes estados, además de clasificar las tareas según su prioridad (baja, media y alta).
-
-Contar tareas en progreso: Se cuenta el número total de tareas que están actualmente en progreso (estado en progreso).
-
-Contar tareas completadas: Se cuenta el número total de tareas que ya han sido completadas.
+📌 Reglas de validación:
+La contraseña debe tener un mínimo de 8 caracteres.
+La contraseña y la confirmación deben coincidir, de lo contrario, se mostrará un mensaje de error.
+Este mecanismo asegura que los usuarios creen contraseñas más seguras y evita errores al ingresarlas.
